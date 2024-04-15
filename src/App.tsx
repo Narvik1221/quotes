@@ -1,4 +1,4 @@
-import React, { useEffect ,useContext} from "react";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/main.css";
@@ -8,22 +8,7 @@ import { Category } from "./pages/Category";
 import { MyQuotes } from "./pages/MyQuotes";
 import { Header } from "./components/Header";
 import { observer } from "mobx-react-lite";
-import {Context} from "./index";
 export const App = observer(() => {
-  const {quotes}:any = useContext(Context)
-useEffect(()=>{
-  // quotes.setLikes({
-  //   _id:'123',
-  //   author:'a',
-  //   content:'c'
-  // })
-  // quotes.setLikes(JSON.parse(localStorage.getItem('likes')|| '{}'))
-  quotes.setQuotes([{
-    _id:'123',
-    author:'a',
-    content:'c'
-  }])
-},[])
   return (
     <div className="wrapper">
       <BrowserRouter>

@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext, DOMElement } from "react";
+import { useState, useEffect } from "react";
 import { Quote } from "../components/Quote";
 import Card from "react-bootstrap/Card";
 import { observer } from "mobx-react-lite";
-import { Context } from "../index";
 import { TagsList } from "../components/TagsList";
 export interface Item {
   _id: string;

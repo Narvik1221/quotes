@@ -17,13 +17,9 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-
   -webkit-box-orient: vertical;
-
   -webkit-box-direction: normal;
-
   -ms-flex-direction: column;
-
   flex-direction: column;
 }
 
@@ -50,8 +46,8 @@ html,
   padding: 20px 0 60px 0;
   justify-content: space-between;
 }
-.start__inner > *{
-margin-bottom: 20px;
+.start__inner > * {
+  margin-bottom: 20px;
 }
 .start__cards {
   gap: 20px;
@@ -73,7 +69,6 @@ margin-bottom: 20px;
   position: absolute;
   bottom: 20px;
   right: 20px;
-  
 }
 .card-like.active {
   background-image: url("../images/like-active.svg");
@@ -106,4 +101,7 @@ margin-bottom: 20px;
 }
 .tag__link {
   width: 100%;
+}
+.scroll__content {
+  display: none !important;
 }

@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
-import { TagsList } from "../components/TagsList";
 import { Item } from "../pages/Start";
 import { getPerson } from "../pages/Start";
 import { filterData } from "../pages/Start";
@@ -20,7 +19,6 @@ export const Category = observer(() => {
   useEffect(() => {
     let path = location.pathname.split("/");
     let category = path[path.length - 1];
-
     setCategory(category);
   }, []);
   useEffect(() => {

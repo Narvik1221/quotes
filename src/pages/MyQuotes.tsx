@@ -9,7 +9,6 @@ export interface Item {
   author: string;
   content: string;
 }
-
 export const MyQuotes = observer(() => {
   const [items, setItems] = useState<any>([]);
   const { quotes }: any = useContext(Context);
@@ -21,7 +20,6 @@ export const MyQuotes = observer(() => {
       <div className="container">
         <div className="start__inner">
           <Card.Title className="my-quote-title">My quotes</Card.Title>
-
           <div className="start__cards">
             {Object.keys(items).length !== 0 ? (
               Object.keys(items).map((keyName, i) => (

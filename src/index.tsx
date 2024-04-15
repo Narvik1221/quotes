@@ -1,8 +1,7 @@
 // @ts-nocheck
-import React, { createContext } from "react";
+import  { createContext } from "react";
 import ReactDOM from "react-dom/client";
 import { App } from "./App";
-import reportWebVitals from "./reportWebVitals";
 import Store from "./store/Store";
 export const Context = createContext([]);
 const root = ReactDOM.createRoot(

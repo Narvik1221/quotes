@@ -1,14 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { TagList } from "../components/TagsList";
 import { observer } from "mobx-react-lite";
-import { Context } from "../index";
-import { Link, useLocation } from "react-router-dom";
-import { toJS } from "mobx";
+import { Link} from "react-router-dom";
 export const Tag: React.FC<TagList> = observer(
   ({ _id, name, slug, quoteCount }) => {
-    const { quotes }: any = useContext(Context);
     useEffect(() => {}, []);
     return (
       <div id={_id} className="tag ">

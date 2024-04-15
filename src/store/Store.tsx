@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx";
-import { Item } from "../pages/Start";
 
 export default class Store {
   _quotes: any;

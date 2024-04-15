@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Quote } from "../components/Quote";
+import  { useState, useEffect, useContext } from "react";
 import { observer } from "mobx-react-lite";
 import Card from "react-bootstrap/Card";
 import { Context } from "../index";
