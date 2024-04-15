@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, DOMElement } from "react";
 import { Quote } from "../components/Quote";
 import Card from "react-bootstrap/Card";
 import { observer } from "mobx-react-lite";
@@ -14,17 +14,48 @@ export const getPerson = async (url: string) => {
   const response = await fetch(url);
   return response.json();
 };
-
+export const filterData = (data) => {
+  let dataFilter = data.filter(
+    (value, index, self) => index === self.findIndex((t) => t._id === value._id)
+  );
+  return dataFilter;
+};
 export const Start = observer(() => {
-  const [items, setItems] = useState([]);
-  const { quotes }: any = useContext(Context);
+  const [items, setItems] = useState<any>([]);
+  const [totalCount, setTotalCount] = useState<number>(1);
+  const [fetching, setFetching] = useState<boolean>(true);
   useEffect(() => {
-    console.log(quotes.quotes);
-    getPerson("https://api.quotable.io/quotes/random?limit=20").then((data) => {
-      setItems(data);
-      console.log(data.results);
-    });
+    if (fetching)
+      getPerson("https://api.quotable.io/quotes/random?limit=20")
+        .then((data: any) => {
+          let filteredData = filterData([...items, ...data]);
+          setItems(filteredData);
+          setTotalCount(filteredData.length);
+        })
+        .finally(() => setFetching(false));
+  }, [fetching]);
+  useEffect(() => {
+    document.addEventListener("scroll", (e) =>
+      scrollHandler(e, setFetching(true))
+    );
+    return function () {
+      document.removeEventListener("scroll", (e) =>
+        scrollHandler(e, setFetching(true))
+      );
+    };
   }, []);
+
+  const scrollHandler = (e: any, cb) => {
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+        100 &&
+      totalCount > 0
+    ) {
+      console.log("scroll");
+      cb(true);
+    }
+  };
   return (
     <div className="start">
       <div className="container">

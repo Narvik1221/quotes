@@ -8,8 +8,7 @@ import { toJS } from "mobx";
 export const Quote: React.FC<Item> = observer(({ _id, author, content }) => {
   const { quotes }: any = useContext(Context);
   useEffect(() => {
-    console.log(toJS(quotes.likes));
-    console.log(toJS(quotes.likes)[_id]);
+
   }, []);
   const likeCard = (event: React.MouseEvent<HTMLButtonElement>) => {
     let myLikes = toJS(quotes.likes);
