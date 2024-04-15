@@ -20,32 +20,35 @@ export const TagsList = observer(() => {
   const [items, setItems] = useState([]);
   const { quotes }: any = useContext(Context);
   useEffect(() => {
-    console.log(quotes.quotes);
     getPerson("https://api.quotable.io/tags?sortBy=quoteCount&order=desc").then(
       (data) => {
         setItems(data);
-        console.log(data);
       }
     );
   }, []);
   return (
     <>
-    <Card.Title>Categories</Card.Title>
-    <Card>
-      <Card.Body className="tag-container">
-        {items.length > 0 &&
-          items.map((i: TagList) => (
-            <Tag
-              key={i._id}
-              _id={i._id}
-              name={i.name}
-              slug={i.slug}
-              quoteCount={i.quoteCount}
-            ></Tag>
-          ))}
-      </Card.Body>
-    </Card>
+      <Card.Title>Categories</Card.Title>
+      <Card>
+        <Card.Body className="tag-container">
+          {items.length > 0 ? (
+            items.map(
+              (i: TagList) =>
+                i.quoteCount > 0 && (
+                  <Tag
+                    key={i._id}
+                    _id={i._id}
+                    name={i.name}
+                    slug={i.slug}
+                    quoteCount={i.quoteCount}
+                  ></Tag>
+                )
+            )
+          ) : (
+            <div className="empty-quotes">Loading...</div>
+          )}
+        </Card.Body>
+      </Card>
     </>
-    
   );
 });

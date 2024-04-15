@@ -46,12 +46,12 @@ html,
   flex: 1 1 auto;
 }
 .start__inner {
-  flex-direction: column;
   flex-wrap: wrap;
   padding: 20px 0 60px 0;
-  display: flex;
   justify-content: space-between;
-  gap: 20px;
+}
+.start__inner > *{
+margin-bottom: 20px;
 }
 .start__cards {
   gap: 20px;
@@ -60,6 +60,7 @@ html,
 }
 
 .quote {
+  max-width: 460px;
   max-height: 308px;
 }
 .card-like {

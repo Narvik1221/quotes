@@ -20,6 +20,16 @@ export const filterData = (data) => {
   );
   return dataFilter;
 };
+export const scrollHandler = (e: any, cb, count) => {
+  if (
+    e.target.documentElement.scrollHeight -
+      (e.target.documentElement.scrollTop + window.innerHeight) <
+      100 &&
+    count > 0
+  ) {
+    cb(true);
+  }
+};
 export const Start = observer(() => {
   const [items, setItems] = useState<any>([]);
   const [totalCount, setTotalCount] = useState<number>(1);
@@ -27,7 +37,7 @@ export const Start = observer(() => {
   useEffect(() => {
     if (fetching)
       getPerson("https://api.quotable.io/quotes/random?limit=20")
-        .then((data: any) => {
+        .then((data) => {
           let filteredData = filterData([...items, ...data]);
           setItems(filteredData);
           setTotalCount(filteredData.length);
@@ -36,26 +46,15 @@ export const Start = observer(() => {
   }, [fetching]);
   useEffect(() => {
     document.addEventListener("scroll", (e) =>
-      scrollHandler(e, setFetching(true))
+      scrollHandler(e, setFetching, totalCount)
     );
     return function () {
       document.removeEventListener("scroll", (e) =>
-        scrollHandler(e, setFetching(true))
+        scrollHandler(e, setFetching, totalCount)
       );
     };
   }, []);
 
-  const scrollHandler = (e: any, cb) => {
-    if (
-      e.target.documentElement.scrollHeight -
-        (e.target.documentElement.scrollTop + window.innerHeight) <
-        100 &&
-      totalCount > 0
-    ) {
-      console.log("scroll");
-      cb(true);
-    }
-  };
   return (
     <div className="start">
       <div className="container">
@@ -63,7 +62,7 @@ export const Start = observer(() => {
           <TagsList></TagsList>
           <Card.Title>Top Quotes</Card.Title>
           <div className="start__cards">
-            {items.length > 0 &&
+            {items.length > 0 ? (
               items.map((i: Item) => (
                 <Quote
                   key={i._id}
@@ -71,7 +70,10 @@ export const Start = observer(() => {
                   author={i.author}
                   content={i.content}
                 ></Quote>
-              ))}
+              ))
+            ) : (
+              <div className="empty-quotes">Loading...</div>
+            )}
           </div>
         </div>
       </div>
